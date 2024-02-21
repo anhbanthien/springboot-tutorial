@@ -4,10 +4,7 @@ import org.example.nobs.entity.Product;
 import org.example.nobs.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +30,23 @@ public class ProductController {
     public ResponseEntity <Optional<Product>> getProduct (@PathVariable Integer id){
         return ResponseEntity.ok(productRepo.findById(id));
     }
+    @PostMapping ("create-product")
+    public ResponseEntity<Product> createProduct (@RequestBody Product product ) {
+        productRepo.save(product);
+        return ResponseEntity.ok(product);
+    }
+    @PutMapping ("/product/{id}")
+    public ResponseEntity<Product> updateProduct (@PathVariable Integer id , @RequestBody Product product){
+         product.setId(id);
+         productRepo.save(product);
+        return ResponseEntity.ok(product);
+    }
 
-
-
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity deleteProduct (@PathVariable Integer id){
+        productRepo.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 
 
 }
