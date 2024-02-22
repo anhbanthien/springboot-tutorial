@@ -1,4 +1,4 @@
-package org.example.nobs.queryhandler;
+package org.example.nobs.query.queryhandler;
 
 import org.example.nobs.entity.Product;
 import org.example.nobs.query.Query;

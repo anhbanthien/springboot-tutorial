@@ -1,27 +1,24 @@
 package org.example.nobs.controller;
 
+import org.example.nobs.command.commandhandler.CreateProductCommand;
 import org.example.nobs.entity.Product;
-import org.example.nobs.queryhandler.GetAllProductsQueryHandler;
-import org.example.nobs.queryhandler.GetProductQueryHandler;
+import org.example.nobs.query.queryhandler.GetAllProductsQueryHandler;
+import org.example.nobs.query.queryhandler.GetProductQueryHandler;
 import org.example.nobs.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class ProductController {
 
-    @Autowired
-    private ProductRepo productRepo;
-
-    @Autowired
-    private GetAllProductsQueryHandler getAllProductsQueryHandler;
-    @Autowired
-    private GetProductQueryHandler getProductQueryHandler;
+    @Autowired private ProductRepo productRepo;
+    @Autowired private GetAllProductsQueryHandler getAllProductsQueryHandler;
+    @Autowired private GetProductQueryHandler getProductQueryHandler;
+    @Autowired private CreateProductCommand createProductCommand;
 
    // Create , Read , Update ,Delete
     // post  , get ,  put   ,delete
@@ -39,7 +36,7 @@ public class ProductController {
     }
     @PostMapping ("create-product")
     public ResponseEntity<Product> createProduct (@RequestBody Product product ) {
-        productRepo.save(product);
+        createProductCommand.execute(product);
         return ResponseEntity.ok(product);
     }
     @PutMapping ("/product/{id}")
