@@ -4,6 +4,7 @@ import org.example.nobs.command.commandhandler.CreateProductCommand;
 import org.example.nobs.command.commandhandler.DeleteProductCommand;
 import org.example.nobs.command.commandhandler.UpdateProductCommand;
 import org.example.nobs.command.productupdate.ProductUpdate;
+import org.example.nobs.dto.ProductDto;
 import org.example.nobs.entity.Product;
 import org.example.nobs.query.queryhandler.GetAllProductsQueryHandler;
 import org.example.nobs.query.queryhandler.GetProductQueryHandler;
@@ -32,11 +33,11 @@ public class ProductController {
         return "get products endpoint";
     }
     @GetMapping("/getAllProducts")
-    public ResponseEntity <List<Product>> getAllProducts (){
+    public ResponseEntity <List<ProductDto>> getAllProducts (){
         return getAllProductsQueryHandler.execute(null);
     }
     @GetMapping("/product/{id}")
-    public ResponseEntity <Product> getProduct (@PathVariable Integer id){
+    public ResponseEntity <ProductDto> getProduct (@PathVariable Integer id){
             return getProductQueryHandler.execute(id);
     }
     @PostMapping ("create-product")
