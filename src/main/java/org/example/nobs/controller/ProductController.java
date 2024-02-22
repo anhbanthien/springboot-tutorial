@@ -1,6 +1,7 @@
 package org.example.nobs.controller;
 
 import org.example.nobs.command.commandhandler.CreateProductCommand;
+import org.example.nobs.command.commandhandler.DeleteProductCommand;
 import org.example.nobs.command.commandhandler.UpdateProductCommand;
 import org.example.nobs.command.productupdate.ProductUpdate;
 import org.example.nobs.entity.Product;
@@ -22,6 +23,7 @@ public class ProductController {
     @Autowired private GetProductQueryHandler getProductQueryHandler;
     @Autowired private CreateProductCommand createProductCommand;
     @Autowired private UpdateProductCommand updateProductCommand;
+    @Autowired private DeleteProductCommand deleteProductCommand;
 
    // Create , Read , Update ,Delete
     // post  , get ,  put   ,delete
@@ -38,21 +40,19 @@ public class ProductController {
             return getProductQueryHandler.execute(id);
     }
     @PostMapping ("create-product")
-    public ResponseEntity<Product> createProduct (@RequestBody Product product ) {
-        createProductCommand.execute(product);
-        return ResponseEntity.ok(product);
+    public ResponseEntity createProduct (@RequestBody Product product ) {
+        return createProductCommand.execute(product);
     }
     @PutMapping ("/product/{id}")
-    public ResponseEntity<Product> updateProduct (@PathVariable Integer id , @RequestBody Product product){
+    public ResponseEntity updateProduct (@PathVariable Integer id , @RequestBody Product product){
         ProductUpdate productUpdate = new ProductUpdate(id,product);
-        updateProductCommand.execute(productUpdate);
-        return ResponseEntity.ok(product);
+         return updateProductCommand.execute(productUpdate);
     }
 
     @DeleteMapping("/product/{id}")
     public ResponseEntity deleteProduct (@PathVariable Integer id){
-        productRepo.deleteById(id);
-        return ResponseEntity.ok().build();
+       return deleteProductCommand.execute(id);
+
     }
 
 

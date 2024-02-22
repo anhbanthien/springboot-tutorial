@@ -13,11 +13,12 @@ import org.springframework.stereotype.Service;
 public class CreateProductCommand implements Command<Product, ResponseEntity> {
     @Autowired private ProductRepo productRepo;
     @Override
-    public ResponseEntity<ResponseEntity> execute(Product product) {
+    public ResponseEntity execute(Product product) {
         validationProduct(product);
         productRepo.save(product);
         return ResponseEntity.ok().build();
     }
+
 
 
     private void validationProduct(Product product) {
