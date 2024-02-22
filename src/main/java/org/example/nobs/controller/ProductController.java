@@ -1,6 +1,8 @@
 package org.example.nobs.controller;
 
 import org.example.nobs.command.commandhandler.CreateProductCommand;
+import org.example.nobs.command.commandhandler.UpdateProductCommand;
+import org.example.nobs.command.productupdate.ProductUpdate;
 import org.example.nobs.entity.Product;
 import org.example.nobs.query.queryhandler.GetAllProductsQueryHandler;
 import org.example.nobs.query.queryhandler.GetProductQueryHandler;
@@ -19,6 +21,7 @@ public class ProductController {
     @Autowired private GetAllProductsQueryHandler getAllProductsQueryHandler;
     @Autowired private GetProductQueryHandler getProductQueryHandler;
     @Autowired private CreateProductCommand createProductCommand;
+    @Autowired private UpdateProductCommand updateProductCommand;
 
    // Create , Read , Update ,Delete
     // post  , get ,  put   ,delete
@@ -41,8 +44,8 @@ public class ProductController {
     }
     @PutMapping ("/product/{id}")
     public ResponseEntity<Product> updateProduct (@PathVariable Integer id , @RequestBody Product product){
-         product.setId(id);
-         productRepo.save(product);
+        ProductUpdate productUpdate = new ProductUpdate(id,product);
+        updateProductCommand.execute(productUpdate);
         return ResponseEntity.ok(product);
     }
 
