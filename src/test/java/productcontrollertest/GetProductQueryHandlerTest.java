@@ -33,9 +33,9 @@ public class GetProductQueryHandlerTest {
         product.setName("M1");
         product.setPrice(1200.0);
         ProductDto exceptedDTO = new ProductDto(product);
-        //Thiết lập giả định với Mockito:
-        //Sử dụng when(productRepo.findById(product.getId())) để thiết lập một giả định rằng khi gọi phương thức findById() của productRepo với ID của sản phẩm, sẽ trả về một Optional chứa đối tượng sản phẩm. Điều này giả định rằng productRepo sẽ trả về đối tượng sản phẩm tương ứng với ID đã cung cấp.
-        //Trong trường hợp này, thenReturn(Optional.of(product)) được sử dụng để chỉ định rằng kết quả trả về của findById() sẽ là một Optional chứa đối tượng sản phẩm đã được tạo trước đó.
+//        Thiết lập giả định với Mockito:
+//        Sử dụng when(productRepo.findById(product.getId())) để thiết lập một giả định rằng khi gọi phương thức findById() của productRepo với ID của sản phẩm, sẽ trả về một Optional chứa đối tượng sản phẩm. Điều này giả định rằng productRepo sẽ trả về đối tượng sản phẩm tương ứng với ID đã cung cấp.
+//        Trong trường hợp này, thenReturn(Optional.of(product)) được sử dụng để chỉ định rằng kết quả trả về của findById() sẽ là một Optional chứa đối tượng sản phẩm đã được tạo trước đó.
         when(productRepo.findById(product.getId())).thenReturn(Optional.of(product));
         ResponseEntity<ProductDto> actualResponse = getProductQueryHandler.execute(product.getId());
         assertEquals(exceptedDTO,actualResponse.getBody());

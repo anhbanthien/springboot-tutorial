@@ -10,6 +10,8 @@ import org.example.nobs.query.queryhandler.GetAllProductsQueryHandler;
 import org.example.nobs.query.queryhandler.GetProductQueryHandler;
 import org.example.nobs.repo.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +38,13 @@ public class ProductController {
     public ResponseEntity <List<ProductDto>> getAllProducts (){
         return getAllProductsQueryHandler.execute(null);
     }
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProducts (@RequestParam("name") String name) {
+        List<Product> products = productRepo.searchProductByName(name);
+        return ResponseEntity.ok(products);
+    }
+
+
     @GetMapping("/product/{id}")
     public ResponseEntity <ProductDto> getProduct (@PathVariable Integer id){
             return getProductQueryHandler.execute(id);
@@ -44,6 +53,8 @@ public class ProductController {
     public ResponseEntity createProduct (@RequestBody Product product ) {
         return createProductCommand.execute(product);
     }
+
+
     @PutMapping ("/product/{id}")
     public ResponseEntity updateProduct (@PathVariable Integer id , @RequestBody Product product){
         ProductUpdate productUpdate = new ProductUpdate(id,product);
