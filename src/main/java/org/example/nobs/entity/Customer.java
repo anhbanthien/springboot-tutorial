@@ -3,6 +3,8 @@ package org.example.nobs.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name="customer")
 @Data
@@ -15,7 +17,11 @@ public class Customer {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+
+    //@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "address_id")
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private List<Address> address;
 }
