@@ -17,11 +17,16 @@ public class Customer {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-
+    // relationship one to one
     //@OneToOne(cascade = CascadeType.ALL)
+    //relationship one to many
     //@JoinColumn(name = "address_id")
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id")
-    private List<Address> address;
+    //relationship many to many
+    @ManyToMany
+    @JoinTable(
+            name = "customer_address",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    private List<Address> addresses;
 }

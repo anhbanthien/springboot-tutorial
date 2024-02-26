@@ -1,7 +1,10 @@
 package org.example.nobs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -17,5 +20,10 @@ public class Address {
     @Column(name = "state")
     private String state;
 
-    private Long customerId;
+    @ManyToMany(mappedBy = "addresses")
+    @JsonIgnore
+    private List<Customer> customer;
+    //stack over flow ?
+    //how to solve: DTO or JSON IGNORE
+    //private Long customerId;
 }
