@@ -15,4 +15,5 @@ public class CatFactController {
     public ResponseEntity<CatfactDTO> getCatfact (){
         return catFactQueryHandler.execute(null);
     }
+
 }
