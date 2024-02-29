@@ -25,9 +25,9 @@ public class CacheConfiguration {
         System.out.println(cacheManager.getCacheNames());
         return  cacheManager;
     }
-    @CacheEvict(value = "productCache",allEntries = true)
-    @Scheduled(fixedDelay = 2000 ,initialDelay = 0)
-    public void evictProductCache (){
-        System.out.println("evict products cache");
-    }
+//    @CacheEvict(value = "productCache",allEntries = true)
+//    @Scheduled(fixedDelay = 2000 ,initialDelay = 0)
+//    public void evictProductCache (){
+//        System.out.println("evict products cache");
+//    }
 }
