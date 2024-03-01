@@ -14,5 +14,14 @@ public class SecurityController {
         return "Login IS Required";
     }
 
+    @GetMapping("/special")
+    public String special (){
+        return "SPECIAL";
+    }
+    @GetMapping("/basic")
+    public String basic (){
+        return "BASIC";
+    }
+
 
 }
