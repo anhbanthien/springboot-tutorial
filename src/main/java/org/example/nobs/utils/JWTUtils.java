@@ -17,7 +17,7 @@ public class JWTUtils {
                 .signWith(SignatureAlgorithm.HS512,SEC_RET)
                 .compact();
     }
-    //later will have another method for extract username
+    //decode
     public static String extractUsername (String token){
         return Jwts.parser().setSigningKey(SEC_RET)
                 .parseClaimsJws(token).getBody()

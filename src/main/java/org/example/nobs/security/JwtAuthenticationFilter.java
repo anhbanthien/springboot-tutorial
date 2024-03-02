@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Collections;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Override
+        @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -23,7 +23,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        System.out.println(authHeader);
 
         String token = null;
 
@@ -35,7 +34,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (token !=null && JWTUtils.validateToken(token)){
             // trích xuất tên người dùng
             String username = JWTUtils.extractUsername(token);
-
             //tạo đối tượng xác thực biểu diễn thông tin liên quan đến người dùng
             Authentication auth = new UsernamePasswordAuthenticationToken(username,null, Collections.emptyList());
             // người dùng đc xác thực và có quyền truy cập vào tài nguyên ứng dụng
